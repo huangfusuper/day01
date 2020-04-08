@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3vue组件的基本使用.html</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  /*组件的声明 */
+  const App = {
+    data(){
+      return{
+
+      }
+    },
+    template:`
+      <div>
+        我是组件入口
+      </div>
+    `
+  }
+
+
+  const vue = new Vue({
+    el:"#app",
+    data(){
+      return{
+
+      }
+    },
+    components:{
+      App
+    },
+    template:`
+      <App/>
+    `
+  });
+
+</script>
+</body>
+</html>

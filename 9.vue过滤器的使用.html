@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+
+<script>
+  //定义全局的过滤器
+  Vue.filter("MyF",function (value) {
+    return value.split('').reverse().join('');
+  })
+
+  const App = {
+    data(){
+      return {
+        name:"",
+        msg:""
+      }
+    },
+    template: `
+      <div>
+        <input v-model="name"/>
+        <input v-model="msg"/>
+        <h3>{{name|myFilter}}</h3>
+        <h3>{{msg|MyF}}</h3>
+      </div>
+
+
+    `,
+    filters:{
+      //声明过滤器  值|过滤器的名字   局部过滤器
+      myFilter(value){
+        return "皇甫"+value;
+      }
+    }
+  }
+
+  new Vue({
+    el:"#app",
+    template:`<App/>`,
+    components:{
+      App
+    }
+  });
+</script>
+</body>
+</html>

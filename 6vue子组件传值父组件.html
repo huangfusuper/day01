@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5vue父组件传值子组件.html</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  //父组件  砸父组件中自定义一个事件   由子组件触发该事件 并接收参数
+  Vue.component('Parent',{
+    template:`<div>
+                <p>父组件</p>
+                  <Child @chileHandler="chileHandlerMethod"/>
+              </div>`,
+    methods:{
+      chileHandlerMethod(val){
+        console.log(val);
+      }
+    }
+  });
+
+  //子组件 子组件中使用this.$emit 触发父组件的自定义事件   并传递参数  完成子组件向父组件传递参数
+  Vue.component('Child',{
+    data(){
+      return {
+        msg:""
+      }
+    },
+    template:`<div>
+                <p>子组件</p>
+                <input v-model="msg" @input="changValue(msg)"/>
+              </div>`,
+
+    methods:{
+      changValue(msg){
+        this.$emit('chileHandler',msg)
+      }
+    }
+  });
+
+  //组件的声明
+  const App = {
+
+    template: `
+      <div>
+        <Parent/>
+      </div>
+    `
+  }
+
+
+  const vue = new Vue({
+    el:"#app",
+    data(){
+      return {
+
+      }
+    },
+    //用子
+    template:'<App/>',
+    //挂子
+    components:{
+      App
+    }
+  });
+
+</script>
+</body>
+</html>

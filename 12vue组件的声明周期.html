@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>12vue组件的声明周期.html</title>
+</head>
+<body>
+<div id="app">
+  <keep-alive>
+    <Test v-if="isShow"></Test>
+  </keep-alive>
+  <button @click="isShow = !isShow">销毁</button>
+
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  Vue.component("Test",{
+    data(){
+      return {
+        msg:"hello vue"
+      }
+    },
+    template:`
+      <div>
+        <div>{{msg}}</div>
+        <button @click="clickFun">点击</button>
+
+      </div>
+
+    `,
+    beforeCreate:function(){
+      console.log(this)
+      console.log(this.msg)
+    },
+    methods:{
+      clickFun:function () {
+        this.msg = "皇甫"+this.msg
+      }
+    },
+    created:function () {
+      console.log(this)
+      console.log(this.msg)
+      //通常曹祖客户端的数据  数据驱动视图
+      //发送初始化axios请求
+    },
+    beforeMount:function(){
+      //挂载数据到dom之前
+      console.log(document.getElementById("app"))
+    },
+    mounted:function () {
+      //挂载数据之后
+      console.log(document.getElementById("app"))
+    },
+    beforeUpdate:function(){
+      //修改数据之前
+      console.log(document.getElementById("app").innerHTML)
+    },
+    updated:function () {
+      //修改数据之后
+      console.log(document.getElementById("app").innerHTML)
+    },
+    beforeDestroy:function(){
+      console.log("v-if 组件被删除 销毁之前");
+    },
+    destroyed:function () {
+      console.log("v-if 组件被删除 销毁之后");
+    },
+    activated:function(){
+      console.log("内置组件<keep-alive> 组件被激活了");
+    },
+    deactivated:function () {
+      console.log("内置组件<keep-alive 组件被停用了");
+    }
+
+
+  });
+  const app = new Vue({
+    el: "#app",
+    data(){
+      return {
+        isShow:true
+      }
+    },
+    methods: {}
+
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>10vue中watch的使用.html</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="msg"/>
+    <h1>{{msg}}</h1>
+    <input type="text" v-model="stsu[0].name"/>
+    <h1>{{stsu[0].name}}</h1>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el:"#app",
+      data(){
+        return {
+          msg:"",
+          stsu:[{name:""}]
+        }
+      },
+      watch:{
+        //简短数据类型
+        msg:function (newValue,oldValue) {
+          console.log(newValue,oldValue)
+        },
+        //复杂数据类型
+        stsu:{
+          deep:true,
+          handle:function (newValue,oldValue) {
+            console.log(newValue[0].name)
+            console.log(oldValue[0].name)
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

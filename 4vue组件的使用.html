@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3vue组件的基本使用.html</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+  Vue.component('VBtn',{
+    template:`
+      <button>按钮</button>
+    `
+  })
+
+  const VHandler = {
+    template:`
+      <div>头部组件</div>
+    `
+  }
+
+  const VLeft = {
+    template:`
+      <div>侧边栏组件</div>
+    `
+  }
+
+  const VContent = {
+    template:`
+      <div>内容组件</div>
+    `
+  }
+
+  //组件的声明
+  const App = {
+    //声子
+    data(){
+      return {
+
+      }
+    },
+    template: `
+      <div>
+        <VHandler/>
+        <VLeft/>
+        <VContent/>
+        <VBtn/>
+        <VBtn/>
+        <VBtn/>
+      </div>
+    `,
+    components: {
+      VHandler,
+      VLeft,
+      VContent
+    }
+  }
+
+
+  const vue = new Vue({
+    el:"#app",
+    data(){
+      return {
+
+      }
+    },
+    //用子
+    template:'<App/>',
+    //挂子
+    components:{
+      App
+    }
+  });
+
+</script>
+</body>
+</html>

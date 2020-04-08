@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>8vue具名插槽的使用.html</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  Vue.component("MyLi",{
+    template:`
+      <div>
+        <li>
+          <slot name = "one"></slot>
+          <slot name = "to"></slot>
+        </li>
+      </div>
+
+    `
+  })
+
+  const App = {
+    data(){
+      return{
+
+      }
+    },
+    template: `
+      <div>
+        <ul>
+           <MyLi>
+             <h2 slot="one">1</h2>
+             <h2 slot="to">2</h2>
+          </MyLi>
+        </ul>
+      </div>
+    `
+  }
+
+  const vue = new Vue({
+    el:"#app",
+    components:{
+      App
+    },
+    template:`<App>不是默认的值</App>`
+  });
+</script>
+</body>
+</html>

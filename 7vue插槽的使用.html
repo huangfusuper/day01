@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>7vue插槽的使用.html</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  const App = {
+    data(){
+      return{
+
+      }
+    },
+    template: `
+      <div>
+        <slot>
+          默认的值
+        </slot>
+      </div>
+
+
+    `
+  }
+
+  const vue = new Vue({
+    el:"#app",
+    components:{
+      App
+    },
+    template:`<App>不是默认的值</App>`
+  });
+</script>
+</body>
+</html>
