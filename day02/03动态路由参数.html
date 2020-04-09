@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03动态路由参数.html</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="./node_modules/vue-router/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+<script>
+  const userParam = {
+    template:`
+        <div>
+          <h2>用户1</h2>
+        </div>
+      `
+  }
+
+  const userQuery = {
+    template:`
+        <div>
+          <h2>用户2</h2>
+        </div>
+      `
+  }
+
+  const  router = new VueRouter({
+    routes:[
+      {
+        name:"userP",
+        path:"/user/:id",
+        component:userParam
+      },
+      {
+        name:"userQ",
+        path:"/user",
+        component:userQuery
+      }
+    ]
+  });
+
+  const App = {
+    template: `
+        <div>
+          <router-link :to="{name:'userP',params:{id:1}}">用户1</router-link>
+          <router-link :to="{name:'userQ',query:{userId:2}}">注册</router-link>
+          <router-view></router-view>
+
+        </div>
+      `
+  };
+
+  new Vue({
+    el:"#app",
+    template:"<App/>",
+    components:{
+      App
+    },
+    router,
+    created(){
+      console.log(this.$router)
+      console.log(this.$route.params.id)
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03动态路由参数.html</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="./node_modules/vue-router/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+<script>
+
+  const Home = {
+    template:`
+        <div>
+          <h2>首页</h2>
+          <router-link to="/home/song">歌曲</router-link>
+          <router-link to="/home/movie">电影</router-link>
+          <router-view></router-view>
+        </div>
+      `
+  }
+
+  const Song = {
+    template:`
+        <div>
+          <h2>我是音乐</h2>
+        </div>
+      `
+  }
+  const Movie = {
+    template:`
+        <div>
+          <h2>我是电影</h2>
+        </div>
+      `
+  }
+
+  const  router = new VueRouter({
+    routes:[
+      {
+        name:"home",
+        path:"/home",
+        component:Home,
+        children:[
+          {
+            path:"song",
+            component:Song
+          },{
+            path:"movie",
+            component:Movie
+          },
+        ]
+      }
+    ]
+  });
+
+  const App = {
+    template: `
+        <div>
+          <router-link :to="{name:'home'}">首页</router-link>
+          <router-view></router-view>
+
+        </div>
+      `
+  };
+
+  new Vue({
+    el:"#app",
+    template:"<App/>",
+    components:{
+      App
+    },
+    router,
+    created(){
+      console.log(this.$router)
+      console.log(this.$route.params.id)
+    }
+  });
+</script>
+</body>
+</html>

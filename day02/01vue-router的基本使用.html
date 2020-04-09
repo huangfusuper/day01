@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="./node_modules/vue-router/dist/vue.js"></script>
+  <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+  <script>
+
+    const Login = {
+      template:`
+        <div><h2>我是登录界面</h2></div>
+      `
+    }
+    const Resgiter = {
+      template:`
+        <div><h2>我是注册界面</h2></div>
+      `
+    }
+    //定义路由  path是路由的地址  对应标签内的 to属性  component是组件名称  对应触发该路径后展示的界面
+    const router = new VueRouter({
+      routes:[
+        {
+          path:"/login",
+          component:Login
+        },{
+          path:"/resgiter",
+          component:Resgiter
+        }
+      ]
+    });
+    /*定义组件
+    * router-view 标识符合条件的页面会在该标签内展示
+    * router-link 相当于a标签  to相当于 href属性
+    * */
+    const App = {
+      template:`
+        <div>
+
+          <router-link to="/login">登录</router-link>
+          <router-link to="/resgiter">注册</router-link>
+          <router-view></router-view>
+        </div>
+
+      `
+    }
+    /*vue组件*/
+    new Vue({
+      el:"#app",
+      data(){
+        return {
+
+        }
+      },
+      methods:{},
+      template: `<App/>`,
+      components:{
+        App
+      },
+      router
+    });
+  </script>
+</body>
+</html>
